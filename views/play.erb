@@ -1,0 +1,36 @@
+<html>
+<head>
+  <link href="<%= url("/css/stylesheet.css")%>" rel="stylesheet" type="text/css" />
+  <link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+  <h1> <%=@player_1%> </h1>
+  <h3>vs.</h3>
+  <h1> <%=@player_2%> </h1>
+
+  <% if @player1_points <= 0 %>
+    <h2><%=@player_2%> wins!</h2>
+  <% elsif @player2_points <= 0 %>
+    <h2><%=@player_1%> wins!</h2>
+  <% else %>
+    <h3> <%=@player_1%>: <%=@player1_points%>HP <%=@player_2%>: <%=@player2_points%>HP </h3>
+    <!-- <p align="center"><button type="button">Attack <%=@player_2%>!</button></p> -->
+    <h2><%= @player_turn%>'s turn<h2>
+
+    <% unless @player_2 == "CPU" && @player_turn == "CPU" %>
+      <form action="/fight">
+        <input type='submit' value='Attack!'>
+      </form>
+      <form action="/freeze">
+        <input type='submit' value='Freeze!'>
+      </form>
+    <% end %>
+  <% end %>
+
+
+
+
+</body>
+</html>
