@@ -39,27 +39,27 @@ class WizBat < Sinatra::Base
     $game.switch_turn
     @game = $game
     # @player_1 = $game.player_1.name
-    @player_2 = $game.player_2.name
-    @player_turn = $game.turn.name
-    @player1_points = $game.player_1.hp
-    @player2_points = $game.player_2.hp
-    @display_log = $game.log.display
-    @game_over = $game.game_over?
+    # @player_2 = $game.player_2.name
+    # @player_turn = $game.turn.name
+    # @player1_points = $game.player_1.hp
+    # @player2_points = $game.player_2.hp
+    # @display_log = $game.log.display
+    # @game_over = $game.game_over?
     erb(:play)
   end
 
 
   get '/attack' do
-    @turn = $game.turn.name
-    @opponent = $game.opponent.name
+    # @turn = $game.turn.name
+    # @opponent = $game.opponent.name
     $game.attack($game.opponent)
     # $game.switch_turn
     redirect '/play'
   end
 
   get '/freeze' do
-    @turn = $game.turn.name
-    @opponent = $game.opponent.name
+    # @turn = $game.turn.name
+    # @opponent = $game.opponent.name
     $game.freeze($game.opponent)
     redirect '/play'
   end

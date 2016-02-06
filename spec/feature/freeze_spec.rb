@@ -37,7 +37,7 @@ feature 'Freezing player' do
     allow(Kernel).to receive(:rand).and_return(0)
     click_button 'Freeze!'
     # click_button 'Play again!'
-    expect(page).to have_content "Birthday: #{Player::DEFAULT_HP-1}HP"
+    expect(page).to have_content "Birthday: #{Player::DEFAULT_HP}HP"
   end
 
   scenario 'successful freeze skips turn' do

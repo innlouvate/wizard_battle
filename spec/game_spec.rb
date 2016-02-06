@@ -19,6 +19,10 @@ describe Game do
 
   describe '#attack' do
     it 'attacks the other player' do
+      allow(player_1).to receive(:name)
+      allow(player_2).to receive(:name)
+      allow(player_1).to receive(:hp).and_return(10)
+      allow(player_2).to receive(:hp).and_return(10)
       expect(player_2).to receive(:receive_damage)
       game.attack(player_2)
     end

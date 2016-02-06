@@ -2,13 +2,14 @@ feature 'Attacking player' do
 
   scenario 'player_1 is going to attack player_2.' do
     sign_in_and_play
+    allow(Kernel).to receive(:rand).and_return(1)
     click_button 'Attack!'
     expect(page).to have_content 'Heather attacked Birthday'
   end
 
   scenario 'HPs are reduced when attacked' do
     sign_in_and_play
-    random = rand(10)
+    random = 5
     hp = Player::DEFAULT_HP - random
     allow(Kernel).to receive(:rand).and_return(random)
     click_button 'Attack!'
@@ -26,11 +27,9 @@ feature 'Attacking player' do
 
   scenario 'displays message about HP lost' do
     sign_in_and_play
-    random = rand(10)
-    hp = Player::DEFAULT_HP - random
-    allow(Kernel).to receive(:rand).and_return(random)
+    allow(Kernel).to receive(:rand).and_return(5)
     click_button 'Attack!'
-    expect(page).to have_content "causing #{random}HP damage"
+    expect(page).to have_content "causing 5HP damage"
   end
 
   # scenario 'displays message that the attack missed' do
@@ -42,7 +41,7 @@ feature 'Attacking player' do
 
   scenario 'HPs are reduced when attacked' do
     sign_in_and_play
-    random = rand(10)
+    random = 5
     hp = Player::DEFAULT_HP - random
     allow(Kernel).to receive(:rand).and_return(random)
     click_button 'Attack!'
@@ -57,7 +56,7 @@ feature 'Attacking player' do
     allow(Kernel).to receive(:rand).and_return(Player::DEFAULT_HP)
     click_button 'Attack!'
     # click_button 'Play again!'
-    expect(page).to have_content "Heather wins!"
+    expect(page).to have_content "GAME OVER!"
   end
 
 end

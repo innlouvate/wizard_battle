@@ -8,11 +8,11 @@
 
   <h1> <%=@game.player_1.name%> </h1>
   <h3>vs.</h3>
-  <h1> <%=@player_2%> </h1>
+  <h1> <%=@game.player_2.name%> </h1>
 
-  <% if !@game_over %>
-    <h3> <%=@game.player_1.name%>: <%=@player1_points%>HP <%=@player_2%>: <%=@player2_points%>HP </h3>
-    <h2><%= @player_turn%>'s turn<h2>
+  <% if !@game.game_over? %>
+    <h3> <%=@game.player_1.name%>: <%=@game.player_1.hp%>HP <%=@game.player_2.name%>: <%=@game.player_2.hp%>HP </h3>
+    <h2><%= @game.turn.name%>'s turn<h2>
   <% else %>
     <h2> <%= @game.winner.name %> wins this round!</h2>
   <% end %>
@@ -32,7 +32,7 @@
   <% end %>
 
   <section>
-    <%= @display_log %>
+    <%= @game.log.display %>
   </section>
 
 

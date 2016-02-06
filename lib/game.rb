@@ -45,7 +45,7 @@ class Game
   end
 
   def cpu_turn
-      self.send(@available_plays.sample, player_2)
+      self.send(@available_plays.sample, player_1)
   end
 
   def switch_turn
