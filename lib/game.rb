@@ -1,13 +1,15 @@
-equire_relative 'player'
+require_relative 'player'
+require_relative 'log'
 
 class Game
 
-  attr_reader :turn
+  attr_reader :turn, :log
 
   def initialize(player_1, player_2)
     @players = [player_1, player_2]
     @turn = player_2
     @available_plays = ["attack", "freeze"]
+    @log = Log.new
     #some initialize that p2 is cpu
   end
 
@@ -20,23 +22,30 @@ class Game
   end
 
   def attack(player)
-    player.receive_damage(random_num)
+    n = random_num
+    player.receive_damage(n)
+    if n == 0
+      @log.add("#{@turn.name} tried to attack #{opponent.name} but missed...")
+    else
+      @log.add("#{@turn.name} attacked #{opponent.name} causing #{n}HP damage")
+    end
+    end_game
   end
 
   def freeze(player)
     if random_num.even?
-      player.receive_damage(random_num)
+      n = random_num
+      player.receive_damage(n)
+      @log.add("#{opponent.name} is frozen and misses a go! <p>#{@turn.name} froze #{opponent.name} causing #{n}HP damage")
       switch_turn
-      return "froze"
     else
-      "failed to freeze"
+      @log.add("#{@turn.name} tried to freeze #{opponent.name} but failed...")
     end
+    end_game
   end
 
   def cpu_turn
-    if @turn.computer
-      @available_plays.sample
-    end
+      self.send(@available_plays.sample, player_2)
   end
 
   def switch_turn
@@ -45,6 +54,16 @@ class Game
 
   def opponent
     player_1 == turn ? player_2 : player_1
+  end
+
+  def end_game
+    if game_over?
+      @log.add("GAME OVER!")
+    end
+  end
+
+  def winner
+    @players.select {|x| x.hp >= 0}.first
   end
 
   def game_over?
