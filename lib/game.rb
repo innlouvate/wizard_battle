@@ -76,8 +76,4 @@ class Game
     Kernel.rand(10)
   end
 
-  # def cpu_play(player)
-  #   self.send(available_plays.sample), player
-  # end
-
 end
