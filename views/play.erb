@@ -12,6 +12,8 @@
 
   <% if !@game.game_over? %>
     <h3> <%=@game.player_1.name%>: <%=@game.player_1.hp%>HP <%=@game.player_2.name%>: <%=@game.player_2.hp%>HP </h3>
+    <p><progress value="<%= @game.player_1.hp %>" max="50"> </progress>
+       <progress value="<%= @game.player_2.hp %>" max="50"> </progress> 
     <h2><%= @game.turn.name%>'s turn<h2>
   <% else %>
     <h2> <%= @game.winner.name %> wins this round!</h2>
